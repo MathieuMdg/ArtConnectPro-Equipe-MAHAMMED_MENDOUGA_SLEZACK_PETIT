@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.project.artconnect.ui.AdminController">
+
+    <top>
+        <Label text="Panneau Administrateur"
+               style="-fx-font-size: 24px; -fx-padding: 15;"/>
+    </top>
+
+    
+
+    <center>
+
+        <VBox spacing="10" style="-fx-padding: 20;">
+
+            <Button text="Afficher les artistes/Actualiser"
+                    onAction="#loadArtists"/>
+
+            <ListView fx:id="artistListView"/>
+
+        </VBox>
+
+    </center>
+
+</BorderPane>

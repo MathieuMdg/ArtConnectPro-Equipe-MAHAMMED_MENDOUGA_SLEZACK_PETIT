@@ -14,7 +14,7 @@
         </Menu>
         <Menu fx:id="adminMenu" text="Admin">
             <items>
-                <MenuItem text="Panneau Admin"/>
+                <MenuItem text="Panneau Admin" onAction="#openAdminPanel"/>
             </items>
         </Menu>
     </MenuBar>
