@@ -4,112 +4,109 @@ import com.project.artconnect.config.DatabaseConfig;
 import com.project.artconnect.dao.UserDao;
 import com.project.artconnect.persistence.JdbcUserDao;
 import com.project.artconnect.service.AuthService;
+import com.project.artconnect.ui.LoginView;
 import com.project.artconnect.ui.MainController;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
 import java.sql.Connection;
-import java.util.Optional;
 
 public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
 
-        // =========================
-        // CONNEXION BASE DE DONNEES
-        // =========================
+        // =====================================================
+        // DATABASE CONNECTION
+        // =====================================================
 
-        Connection connection = DatabaseConfig.getConnection();
+        Connection connection =
+                DatabaseConfig.getConnection();
 
-        UserDao userDao = new JdbcUserDao(connection);
+        UserDao userDao =
+                new JdbcUserDao(connection);
 
-        AuthService authService = new AuthService(userDao);
+        AuthService authService =
+                new AuthService(userDao);
 
-        // =========================
-        // LOGIN USERNAME
-        // =========================
+        // =====================================================
+        // LOGIN WINDOW
+        // =====================================================
 
-        TextInputDialog userDialog = new TextInputDialog();
+        LoginView loginView =
+                new LoginView(authService);
 
-        userDialog.setTitle("Connexion");
-        userDialog.setHeaderText("Connexion ArtConnect");
-        userDialog.setContentText("Nom d'utilisateur :");
+        loginView.setVisible(true);
 
-        Optional<String> usernameResult = userDialog.showAndWait();
+        // =====================================================
+        // LOGIN FAILED
+        // =====================================================
 
-        if (usernameResult.isEmpty()) {
-            System.exit(0);
-        }
-
-        String username = usernameResult.get();
-
-        // =========================
-        // LOGIN PASSWORD
-        // =========================
-
-        TextInputDialog passwordDialog = new TextInputDialog();
-
-        passwordDialog.setTitle("Connexion");
-        passwordDialog.setHeaderText("Connexion ArtConnect");
-        passwordDialog.setContentText("Mot de passe :");
-
-        Optional<String> passwordResult = passwordDialog.showAndWait();
-
-        if (passwordResult.isEmpty()) {
-            System.exit(0);
-        }
-
-        String password = passwordResult.get();
-
-        // =========================
-        // AUTHENTIFICATION
-        // =========================
-
-        boolean success = authService.login(username, password);
-
-        if (!success) {
-
-            System.out.println("Identifiants incorrects.");
+        if (!loginView.isLoginSuccessful()) {
 
             System.exit(0);
+
+            return;
         }
 
-        // =========================
-        // CHARGEMENT MAIN VIEW
-        // =========================
+        // =====================================================
+        // LOAD MAIN VIEW
+        // =====================================================
 
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/com/project/artconnect/ui/MainView.fxml")
-        );
+        FXMLLoader loader =
+                new FXMLLoader(
+                        getClass().getResource(
+                                "/com/project/artconnect/ui/MainView.fxml"
+                        )
+                );
 
-        Scene scene = new Scene(loader.load(), 1200, 800);
-        MainController controller = loader.getController();
+        Scene scene =
+                new Scene(
+                        loader.load(),
+                        1200,
+                        800
+                );
+
+        MainController controller =
+                loader.getController();
 
         controller.setAuthService(authService);
 
-        stage.setTitle("ArtConnect Pro - Local Art Community Platform");
+        // =====================================================
+        // STAGE
+        // =====================================================
+
+        stage.setTitle(
+                "ArtConnect Pro - Local Art Community Platform"
+        );
 
         stage.setScene(scene);
 
         stage.show();
 
-        // =========================
+        // =====================================================
         // DEBUG ROLE
-        // =========================
+        // =====================================================
 
         if (authService.isAdmin()) {
-            System.out.println("Connection en tant que ADMIN");
+
+            System.out.println(
+                    "Connexion ADMIN"
+            );
+
         } else {
-            System.out.println("Connection en tant que USER");
+
+            System.out.println(
+                    "Connexion USER"
+            );
         }
     }
 
     public static void main(String[] args) {
+
         launch(args);
     }
 }

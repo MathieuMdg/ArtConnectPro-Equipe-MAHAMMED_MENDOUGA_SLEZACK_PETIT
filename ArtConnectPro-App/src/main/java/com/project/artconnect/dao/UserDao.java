@@ -9,4 +9,11 @@ public interface UserDao {
      * Retourne Optional.empty() si aucun utilisateur trouvé.
      */
     Optional<AppUser> findByUsername(String username);
+
+    boolean register(
+            String name,
+            String email,
+            String username,
+            String password
+    );
 }

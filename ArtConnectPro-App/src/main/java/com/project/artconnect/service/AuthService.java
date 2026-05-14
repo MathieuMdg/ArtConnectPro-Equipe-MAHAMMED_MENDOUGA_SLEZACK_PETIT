@@ -52,4 +52,28 @@ public class AuthService {
     public boolean isLoggedIn() {
         return currentUser != null;
     }
+
+    public boolean register(
+            String name,
+            String email,
+            String username,
+            String password
+    ) {
+
+        try {
+
+            return userDao.register(
+                    name,
+                    email,
+                    username,
+                    password
+            );
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            return false;
+        }
+    }
 }

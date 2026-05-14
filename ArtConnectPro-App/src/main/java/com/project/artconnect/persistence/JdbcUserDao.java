@@ -9,6 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
+import org.mindrot.jbcrypt.BCrypt;
+import java.sql.PreparedStatement;
+
 public class JdbcUserDao implements UserDao {
 
     private final Connection connection;
@@ -49,5 +52,76 @@ public class JdbcUserDao implements UserDao {
         }
 
         return Optional.empty(); // aucun utilisateur trouvé
+    }
+
+    @Override
+    public boolean register(
+            String name,
+            String email,
+            String username,
+            String password
+    ) {
+
+        try {
+
+            String memberQuery = """
+                INSERT INTO community_member
+                (name,email,membership_type)
+                VALUES (?,?,?)
+            """;
+
+            PreparedStatement memberStmt =
+                    connection.prepareStatement(
+                            memberQuery,
+                            PreparedStatement.RETURN_GENERATED_KEYS
+                    );
+
+            memberStmt.setString(1,name);
+
+            memberStmt.setString(2,email);
+
+            memberStmt.setString(3,"Standard");
+
+            memberStmt.executeUpdate();
+
+            var generatedKeys = memberStmt.getGeneratedKeys();
+
+            int memberId = -1;
+
+            if(generatedKeys.next()) {
+
+                memberId = generatedKeys.getInt(1);
+            }
+
+            String hashedPassword =
+                    BCrypt.hashpw(password, BCrypt.gensalt());
+
+            String userQuery = """
+                INSERT INTO app_user
+                (username,password,role,member_id)
+                VALUES (?,?,?,?)
+            """;
+
+            PreparedStatement userStmt =
+                    connection.prepareStatement(userQuery);
+
+            userStmt.setString(1,username);
+
+            userStmt.setString(2,hashedPassword);
+
+            userStmt.setString(3,"USER");
+
+            userStmt.setInt(4,memberId);
+
+            userStmt.executeUpdate();
+
+            return true;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            return false;
+        }
     }
 }

@@ -3,103 +3,174 @@ package com.project.artconnect.ui;
 import com.project.artconnect.service.AuthService;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class LoginView extends JDialog {
 
     private final AuthService authService;
+
     private boolean loginSuccessful = false;
 
-    // Composants de l'interface
     private JTextField usernameField;
     private JPasswordField passwordField;
-    private JButton loginButton;
+
     private JLabel errorLabel;
 
     public LoginView(AuthService authService) {
+
         this.authService = authService;
+
         buildUI();
     }
 
     private void buildUI() {
-        setTitle("ArtConnect — Connexion");
-        setSize(400, 250);
-        setLocationRelativeTo(null); // centre la fenêtre
-        setModal(true);              // bloque les autres fenêtres tant que login pas fait
-        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+        setTitle("ArtConnect - Connexion");
+
+        setSize(420, 320);
+
+        setLocationRelativeTo(null);
+
+        setModal(true);
+
         setResizable(false);
 
-        // Panel principal
-        JPanel panel = new JPanel(new GridBagLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 30, 20, 30));
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.setBackground(new Color(245,245,245));
+
+        JPanel formPanel = new JPanel(new GridBagLayout());
+
+        formPanel.setOpaque(false);
+
+        formPanel.setBorder(new EmptyBorder(20,30,20,30));
+
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(8, 8, 8, 8);
+
+        gbc.insets = new Insets(10,10,10,10);
+
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Titre
-        JLabel titleLabel = new JLabel("Bienvenue sur ArtConnect", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
-        panel.add(titleLabel, gbc);
+        JLabel titleLabel = new JLabel("Bienvenue sur ArtConnect");
 
-        // Label "Nom d'utilisateur"
-        gbc.gridwidth = 1; gbc.gridy = 1; gbc.gridx = 0;
-        panel.add(new JLabel("Nom d'utilisateur :"), gbc);
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        // Champ username
-        usernameField = new JTextField(15);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
+
+        titleLabel.setForeground(new Color(44,62,80));
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+
+        formPanel.add(titleLabel, gbc);
+
+        gbc.gridwidth = 1;
+
+        gbc.gridy++;
+
+        formPanel.add(new JLabel("Nom d'utilisateur"), gbc);
+
+        usernameField = new JTextField();
+
+        usernameField.setPreferredSize(new Dimension(200,30));
+
         gbc.gridx = 1;
-        panel.add(usernameField, gbc);
 
-        // Label "Mot de passe"
-        gbc.gridy = 2; gbc.gridx = 0;
-        panel.add(new JLabel("Mot de passe :"), gbc);
+        formPanel.add(usernameField, gbc);
 
-        // Champ mot de passe (masqué)
-        passwordField = new JPasswordField(15);
+        gbc.gridx = 0;
+        gbc.gridy++;
+
+        formPanel.add(new JLabel("Mot de passe"), gbc);
+
+        passwordField = new JPasswordField();
+
+        passwordField.setPreferredSize(new Dimension(200,30));
+
         gbc.gridx = 1;
-        panel.add(passwordField, gbc);
 
-        // Message d'erreur (invisible par défaut)
-        errorLabel = new JLabel("", SwingConstants.CENTER);
+        formPanel.add(passwordField, gbc);
+
+        errorLabel = new JLabel("");
+
         errorLabel.setForeground(Color.RED);
-        gbc.gridy = 3; gbc.gridx = 0; gbc.gridwidth = 2;
-        panel.add(errorLabel, gbc);
 
-        // Bouton de connexion
-        loginButton = new JButton("Se connecter");
-        gbc.gridy = 4;
-        panel.add(loginButton, gbc);
+        errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        add(panel);
+        gbc.gridx = 0;
+        gbc.gridy++;
 
-        // Action du bouton
-        loginButton.addActionListener(e -> tentativeDeConnexion());
+        gbc.gridwidth = 2;
 
-        // Permet aussi d'appuyer sur Entrée dans le champ password
-        passwordField.addActionListener(e -> tentativeDeConnexion());
+        formPanel.add(errorLabel, gbc);
+
+        JPanel buttonPanel = new JPanel(new GridLayout(1,2,10,0));
+
+        buttonPanel.setOpaque(false);
+
+        JButton loginButton = new JButton("Se connecter");
+
+        JButton registerButton = new JButton("Créer un compte");
+
+        buttonPanel.add(loginButton);
+
+        buttonPanel.add(registerButton);
+
+        gbc.gridy++;
+
+        formPanel.add(buttonPanel, gbc);
+
+        loginButton.addActionListener(e -> tentativeConnexion());
+
+        registerButton.addActionListener(e -> {
+
+            RegisterView registerView = new RegisterView(authService);
+
+            registerView.setVisible(true);
+        });
+
+        passwordField.addActionListener(e -> tentativeConnexion());
+
+        mainPanel.add(formPanel, BorderLayout.CENTER);
+
+        add(mainPanel);
     }
 
-    private void tentativeDeConnexion() {
+    private void tentativeConnexion() {
+
         String username = usernameField.getText().trim();
+
         String password = new String(passwordField.getPassword());
 
-        if (username.isEmpty() || password.isEmpty()) {
+        if(username.isEmpty() || password.isEmpty()) {
+
             errorLabel.setText("Veuillez remplir tous les champs.");
+
             return;
         }
 
-        if (authService.login(username, password)) {
+        boolean success = authService.login(username,password);
+
+        if(success) {
+
             loginSuccessful = true;
-            dispose(); // ferme la fenêtre de login
+
+            dispose();
+
         } else {
-            errorLabel.setText("Identifiants incorrects. Réessayez.");
-            passwordField.setText(""); // efface le mot de passe
+
+            errorLabel.setText("Identifiants incorrects.");
+
+            passwordField.setText("");
         }
     }
 
-    /** Retourne true si la connexion a réussi. */
     public boolean isLoginSuccessful() {
+
         return loginSuccessful;
     }
 }

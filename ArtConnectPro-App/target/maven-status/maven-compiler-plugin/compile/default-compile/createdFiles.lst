@@ -55,6 +55,7 @@ com\project\artconnect\persistence\JdbcArtistDao.class
 com\project\artconnect\persistence\JdbcCommunityMemberDao.class
 com\project\artconnect\dao\WorkshopDao.class
 com\project\artconnect\model\Gallery.class
+com\project\artconnect\ui\RegisterView.class
 com\project\artconnect\service\impl\JdbcGalleryService.class
 com\project\artconnect\dao\UserDao.class
 com\project\artconnect\model\AppUser.class
