@@ -4,22 +4,62 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommunityMember {
+
+    private int memberId;
+
     private String name;
+
     private String email;
+
     private Integer birthYear;
+
     private String phone;
+
     private String city;
-    private List<Discipline> favoriteDisciplines = new ArrayList<>();
-    private String membershipType; // free, premium
-    private List<Booking> bookings = new ArrayList<>();
-    private List<Review> reviews = new ArrayList<>();
+
+    private String membershipType;
+
+    private List<Discipline> favoriteDisciplines =
+            new ArrayList<>();
+
+    private List<Booking> bookings =
+            new ArrayList<>();
+
+    private List<Review> reviews =
+            new ArrayList<>();
 
     public CommunityMember() {
     }
 
-    public CommunityMember(String name, String email) {
+    public CommunityMember(
+            int memberId,
+            String name,
+            String email,
+            Integer birthYear,
+            String phone,
+            String city,
+            String membershipType
+    ) {
+
+        this.memberId = memberId;
         this.name = name;
         this.email = email;
+        this.birthYear = birthYear;
+        this.phone = phone;
+        this.city = city;
+        this.membershipType = membershipType;
+    }
+
+    // =====================================================
+    // GETTERS / SETTERS
+    // =====================================================
+
+    public int getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
     }
 
     public String getName() {
@@ -62,20 +102,24 @@ public class CommunityMember {
         this.city = city;
     }
 
-    public List<Discipline> getFavoriteDisciplines() {
-        return favoriteDisciplines;
-    }
-
-    public void setFavoriteDisciplines(List<Discipline> favoriteDisciplines) {
-        this.favoriteDisciplines = favoriteDisciplines;
-    }
-
     public String getMembershipType() {
         return membershipType;
     }
 
     public void setMembershipType(String membershipType) {
         this.membershipType = membershipType;
+    }
+
+    public List<Discipline> getFavoriteDisciplines() {
+        return favoriteDisciplines;
+    }
+
+    public void setFavoriteDisciplines(
+            List<Discipline> favoriteDisciplines
+    ) {
+
+        this.favoriteDisciplines =
+                favoriteDisciplines;
     }
 
     public List<Booking> getBookings() {
@@ -94,15 +138,9 @@ public class CommunityMember {
         this.reviews = reviews;
     }
 
-    public void addBooking(Booking booking) {
-        this.bookings.add(booking);
-        if (booking.getMember() != this) {
-            booking.setMember(this);
-        }
-    }
-
     @Override
     public String toString() {
-        return name;
+
+        return name + " (" + membershipType + ")";
     }
 }

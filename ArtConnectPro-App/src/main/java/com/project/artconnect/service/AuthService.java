@@ -3,6 +3,7 @@ package com.project.artconnect.service;
 import org.mindrot.jbcrypt.BCrypt;
 import com.project.artconnect.dao.UserDao;
 import com.project.artconnect.model.AppUser;
+import com.project.artconnect.session.UserSession;
 
 import java.util.Optional;
 
@@ -19,19 +20,7 @@ public class AuthService {
      * Tente de connecter un utilisateur.
      * @return true si le login est réussi, false sinon.
      */
-    public boolean login(String username, String password) {
-        Optional<AppUser> result = userDao.findByUsername(username);
-
-        if (result.isPresent()) {
-            AppUser user = result.get();
-            // BCrypt.checkpw compare le mot de passe tapé avec le hash stocké
-            if (BCrypt.checkpw(password, user.getPasswordHash())) {
-                this.currentUser = user;
-                return true;
-            }
-        }
-        return false;
-    }
+    
 
     /** Déconnecte l'utilisateur courant. */
     public void logout() {
@@ -83,5 +72,32 @@ public class AuthService {
 
             return false;
         }
+    }
+    public boolean login(String username, String password) {
+
+        Optional<AppUser> optionalUser =
+                userDao.findByUsername(username);
+
+        if(optionalUser.isEmpty()) {
+
+            return false;
+        }
+
+        AppUser user = optionalUser.get();
+
+        boolean validPassword =
+                BCrypt.checkpw(
+                        password,
+                        user.getPasswordHash()
+                );
+
+        if(validPassword) {
+
+            UserSession.login(user);
+
+            return true;
+        }
+
+        return false;
     }
 }

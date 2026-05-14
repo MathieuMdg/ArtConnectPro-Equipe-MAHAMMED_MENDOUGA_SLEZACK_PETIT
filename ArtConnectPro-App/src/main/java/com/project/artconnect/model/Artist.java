@@ -3,35 +3,74 @@ package com.project.artconnect.model;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Artist entity representing a creator in the community.
- */
 public class Artist {
+
+    private int artistId;
+
     private String name;
+
     private String bio;
+
     private Integer birthYear;
-    private List<Discipline> disciplines = new ArrayList<>();
+
+    private List<Discipline> disciplines =
+            new ArrayList<>();
+
     private String contactEmail;
+
     private String phone;
+
     private String city;
+
     private String website;
+
     private String socialMedia;
+
     private boolean isActive;
-    private List<Artwork> artworks = new ArrayList<>();
+
+    private List<Artwork> artworks =
+            new ArrayList<>();
 
     public Artist() {
     }
 
-    public Artist(String name, String bio, Integer birthYear, String contactEmail, String city) {
+    public Artist(
+            int artistId,
+            String name,
+            String bio,
+            Integer birthYear,
+            String contactEmail,
+            String phone,
+            String city,
+            String website,
+            String socialMedia,
+            boolean isActive
+    ) {
+
+        this.artistId = artistId;
         this.name = name;
         this.bio = bio;
         this.birthYear = birthYear;
         this.contactEmail = contactEmail;
+        this.phone = phone;
         this.city = city;
-        this.isActive = true;
+        this.website = website;
+        this.socialMedia = socialMedia;
+        this.isActive = isActive;
     }
 
-    // Getters and Setters
+    // =====================================================
+    // GETTERS / SETTERS
+    // =====================================================
+
+    public int getArtistId() {
+        return artistId;
+    }
+
+    public void setArtistId(int artistId) {
+        this.artistId = artistId;
+    }
+
     public String getName() {
         return name;
     }
@@ -60,7 +99,10 @@ public class Artist {
         return disciplines;
     }
 
-    public void setDisciplines(List<Discipline> disciplines) {
+    public void setDisciplines(
+            List<Discipline> disciplines
+    ) {
+
         this.disciplines = disciplines;
     }
 
@@ -68,7 +110,10 @@ public class Artist {
         return contactEmail;
     }
 
-    public void setContactEmail(String contactEmail) {
+    public void setContactEmail(
+            String contactEmail
+    ) {
+
         this.contactEmail = contactEmail;
     }
 
@@ -100,7 +145,10 @@ public class Artist {
         return socialMedia;
     }
 
-    public void setSocialMedia(String socialMedia) {
+    public void setSocialMedia(
+            String socialMedia
+    ) {
+
         this.socialMedia = socialMedia;
     }
 
@@ -116,19 +164,16 @@ public class Artist {
         return artworks;
     }
 
-    public void setArtworks(List<Artwork> artworks) {
-        this.artworks = artworks;
-    }
+    public void setArtworks(
+            List<Artwork> artworks
+    ) {
 
-    public void addArtwork(Artwork artwork) {
-        this.artworks.add(artwork);
-        if (artwork.getArtist() != this) {
-            artwork.setArtist(this);
-        }
+        this.artworks = artworks;
     }
 
     @Override
     public String toString() {
+
         return name;
     }
 }

@@ -45,8 +45,20 @@ public class JdbcWorkshopDao implements WorkshopDao {
 
     private String baseSelect() {
         return """
-                SELECT w.title, w.date, w.duration_minutes, w.max_participants, w.price, w.location, w.description, w.level,
-                       a.name AS artist_name, a.contact_email, a.city, a.bio
+                SELECT 
+                    w.workshop_id,
+                    w.title,
+                    w.date,
+                    w.duration_minutes,
+                    w.max_participants,
+                    w.price,
+                    w.location,
+                    w.description,
+                    w.level,
+                    a.name AS artist_name,
+                    a.contact_email,
+                    a.city,
+                    a.bio
                 FROM workshop w
                 JOIN artist a ON a.artist_id = w.instructor_artist_id
                 """;
@@ -60,6 +72,7 @@ public class JdbcWorkshopDao implements WorkshopDao {
         artist.setBio(rs.getString("bio"));
 
         Workshop workshop = new Workshop();
+        workshop.setWorkshopId(rs.getInt("workshop_id"));
         workshop.setTitle(rs.getString("title"));
         Timestamp ts = rs.getTimestamp("date");
         if (ts != null) {

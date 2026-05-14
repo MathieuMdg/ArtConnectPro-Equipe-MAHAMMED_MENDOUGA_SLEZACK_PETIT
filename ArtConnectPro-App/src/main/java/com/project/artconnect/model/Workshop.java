@@ -3,24 +3,61 @@ package com.project.artconnect.model;
 import java.time.LocalDateTime;
 
 public class Workshop {
+
+    private int workshopId;
+
     private String title;
+
     private LocalDateTime date;
+
     private int durationMinutes;
+
     private int maxParticipants;
+
     private double price;
+
     private Artist instructor;
+
     private String location;
+
     private String description;
-    private String level; // beginner, intermediate, advanced
+
+    private String level;
 
     public Workshop() {
     }
 
-    public Workshop(String title, LocalDateTime date, Artist instructor, double price) {
+    public Workshop(
+            int workshopId,
+            String title,
+            LocalDateTime date,
+            int durationMinutes,
+            int maxParticipants,
+            double price,
+            Artist instructor,
+            String location,
+            String description,
+            String level
+    ) {
+
+        this.workshopId = workshopId;
         this.title = title;
         this.date = date;
-        this.instructor = instructor;
+        this.durationMinutes = durationMinutes;
+        this.maxParticipants = maxParticipants;
         this.price = price;
+        this.instructor = instructor;
+        this.location = location;
+        this.description = description;
+        this.level = level;
+    }
+
+    public int getWorkshopId() {
+        return workshopId;
+    }
+
+    public void setWorkshopId(int workshopId) {
+        this.workshopId = workshopId;
     }
 
     public String getTitle() {
@@ -43,7 +80,10 @@ public class Workshop {
         return durationMinutes;
     }
 
-    public void setDurationMinutes(int durationMinutes) {
+    public void setDurationMinutes(
+            int durationMinutes
+    ) {
+
         this.durationMinutes = durationMinutes;
     }
 
@@ -51,7 +91,10 @@ public class Workshop {
         return maxParticipants;
     }
 
-    public void setMaxParticipants(int maxParticipants) {
+    public void setMaxParticipants(
+            int maxParticipants
+    ) {
+
         this.maxParticipants = maxParticipants;
     }
 
@@ -83,7 +126,10 @@ public class Workshop {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(
+            String description
+    ) {
+
         this.description = description;
     }
 
@@ -97,6 +143,8 @@ public class Workshop {
 
     @Override
     public String toString() {
-        return title;
+
+        return title + " | " + date.toLocalDate();
     }
+    
 }

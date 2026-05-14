@@ -9,15 +9,14 @@ C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\mai
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\dao\UserDao.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\persistence\JdbcGalleryDao.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\dao\ArtistDao.java
+C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\session\UserSession.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\persistence\JdbcArtistDao.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\MainApp.java
-C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\service\impl\InMemoryWorkshopService.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\ui\AdminController.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\model\Review.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\dao\GalleryDao.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\util\prj.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\service\impl\JdbcWorkshopService.java
-C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\service\impl\InMemoryArtistService.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\ui\ArtworkController.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\model\AppUser.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\model\ArtworkTag.java
@@ -38,7 +37,6 @@ C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\mai
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\ui\RegisterView.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\service\ArtworkService.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\model\Gallery.java
-C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\service\impl\InMemoryArtworkService.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\ui\WorkshopController.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\config\DatabaseConfig.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\model\CommunityMember.java
@@ -49,7 +47,7 @@ C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\mai
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\model\Discipline.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\dao\WorkshopDao.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\ui\ExhibitionController.java
-C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\service\impl\InMemoryCommunityService.java
+C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\service\WorkshopRegistrationService.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\model\Artist.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\persistence\JdbcExhibitionDao.java
 C:\Users\mendo\OneDrive\Documents\GitHub\ArtConnectPro\ArtConnectPro-App\src\main\java\com\project\artconnect\service\CommunityService.java

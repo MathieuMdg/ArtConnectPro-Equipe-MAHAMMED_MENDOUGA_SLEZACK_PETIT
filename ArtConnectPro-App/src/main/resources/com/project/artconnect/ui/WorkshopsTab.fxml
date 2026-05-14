@@ -17,4 +17,6 @@
             <TableColumn fx:id="levelColumn" text="Level" prefWidth="100" />
         </columns>
     </TableView>
+    <Button text="Register to Workshop"
+        onAction="#handleRegisterWorkshop"/>
 </VBox>
