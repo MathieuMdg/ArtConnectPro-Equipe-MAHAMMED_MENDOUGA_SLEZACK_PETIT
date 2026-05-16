@@ -21,7 +21,7 @@ public final class DatabaseConfig {
     public static final String PASSWORD = firstNonBlank(
             System.getProperty("artconnect.db.password"),
             System.getenv("ARTCONNECT_DB_PASSWORD"),
-            "!Ma87_Me04");
+            "");
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
